@@ -1,11 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
+using Aflevering_2.Models;
 
 namespace Aflevering_2.Controllers;
 
-[ApiController]
-[Route("[controller]")]
-public class DiscountController : ControllerBase
+[Route("api/Discounts")]
+public class DiscountController : GenericController<Discount>
 {
-
+    public DiscountController(GenericService<Discount> service) : base(service) { }
 }
-
