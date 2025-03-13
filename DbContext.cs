@@ -11,11 +11,8 @@ public class ExperienceDbContext : DbContext
     public DbSet<Provider> Providers { get; set; }
     public DbSet<SharedExperience> SharedExperiences { get; set; }
 
-    ExperienceDbContext _context;
+
     // Seeding database
-
-
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -23,24 +20,30 @@ public class ExperienceDbContext : DbContext
         modelBuilder.Entity<Provider>().HasData(
             new Provider
             {
+                // setting id's really doesnt matter because the chosen id will be overwritten when seeded to the database,
+                // with the correct value according to it being identity and primary key. It is required though.
+                ProviderId = 1,
                 CVR = 45987632,
                 Address = "Sunset Boulevard 21B, 8000",
-                PhoneNumber = "+45 43219876",
+                PhoneNumber = "+4543219876",
             },
             new Provider
             {
+                ProviderId = 2,
                 CVR = 87542319,
                 Address = "Lakeside Road 8, 5000",
                 PhoneNumber = "+4578945632"
             },
             new Provider
             {
+                ProviderId = 3,
                 CVR = 65498731,
                 Address = "Mountain View 12, 3400",
                 PhoneNumber = "+4598765432"
             },
             new Provider
             {
+                ProviderId = 4,
                 CVR = 32145698,
                 Address = "Coastal Lane 5A, 6000",
                 PhoneNumber = "+4543219876"
@@ -51,6 +54,7 @@ public class ExperienceDbContext : DbContext
         modelBuilder.Entity<Experience>().HasData(
         new Experience
         {
+            ExperienceId = 1,
             Title = "Kayaking",
             Price = 350,
             ProviderId = 1,
@@ -58,6 +62,7 @@ public class ExperienceDbContext : DbContext
 
         new Experience
         {
+            ExperienceId = 2,
             Title = "food",
             Price = 450,
             ProviderId = 2,
@@ -65,6 +70,7 @@ public class ExperienceDbContext : DbContext
 
         new Experience
         {
+            ExperienceId = 3,
             Title = "Wine tasting",
             Price = 600,
             ProviderId = 3,
@@ -72,6 +78,7 @@ public class ExperienceDbContext : DbContext
 
         new Experience
         {
+            ExperienceId = 4,
             Title = "Guided City Tour",
             Price = 275,
             ProviderId = 4,
@@ -79,6 +86,7 @@ public class ExperienceDbContext : DbContext
 
         new Experience
         {
+            ExperienceId = 5,
             Title = "Fredagsbar",
             Price = 220,
             ProviderId = 2,
@@ -86,6 +94,7 @@ public class ExperienceDbContext : DbContext
 
         new Experience
         {
+            ExperienceId = 6,
             Title = "Paragliding",
             Price = 750,
             ProviderId = 2,
@@ -93,6 +102,7 @@ public class ExperienceDbContext : DbContext
 
         new Experience
         {
+            ExperienceId = 7,
             Title = "Diving",
             Price = 525,
             ProviderId = 3,
@@ -104,21 +114,25 @@ public class ExperienceDbContext : DbContext
         modelBuilder.Entity<SharedExperience>().HasData(
             new SharedExperience
             {
+                SharedExperienceId = 1,
                 SE_Title = "Summer Adventure in Aarhus",
                 SE_Date = new DateTime(2025, 06, 18)
             },
             new SharedExperience
             {
+                SharedExperienceId = 2,
                 SE_Title = "Fun stuff in København",
                 SE_Date = new DateTime(2025, 07, 29)
             },
             new SharedExperience
             {
+                SharedExperienceId = 3,
                 SE_Title = "Relaxing in Odense",
                 SE_Date = new DateTime(2025, 07, 10)
             },
             new SharedExperience
             {
+                SharedExperienceId = 4,
                 SE_Title = "Family Getaway in Padborg",
                 SE_Date = new DateTime(2025, 06, 25)
             }
@@ -128,23 +142,28 @@ public class ExperienceDbContext : DbContext
         modelBuilder.Entity<Guest>().HasData(
             new Guest
             {
+                GuestId = 1,
                 GuestName = "Michael Jensen",
                 GuestAge = 32,
                 GuestNumber = "+4534567890"
             },
             new Guest
             {
+                GuestId = 2,
                 GuestName = "Sofie Rasmussen",
-                GuestAge = 27
+                GuestAge = 27,
+                GuestNumber = "+4554460788"
             },
             new Guest
             {
+                GuestId = 3,
                 GuestName = "Emil Kristensen",
                 GuestAge = 34,
                 GuestNumber = "+4567890123"
             },
             new Guest
             {
+                GuestId = 4,
                 GuestName = "Lotte Mikkelsen",
                 GuestAge = 29,
                 GuestNumber = "+4545678901"
@@ -156,12 +175,14 @@ public class ExperienceDbContext : DbContext
         modelBuilder.Entity<Discount>().HasData(
             new Discount
             {
+                DiscountID = 1,
                 minGuests = 4,
                 discountPercentage = 10,
                 ExperienceId = 1
             },
             new Discount
             {
+                DiscountID = 2,
                 minGuests = 3,
                 discountPercentage = 15,
                 ExperienceId = 6
