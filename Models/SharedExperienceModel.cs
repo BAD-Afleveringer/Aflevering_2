@@ -12,4 +12,5 @@ public class SharedExperience
     [Required]
     public DateTime SE_Date { get; set; }
     public ICollection<Guest>? Guests { get; set; }
+    public ICollection<Experience>? Experiences { get; set; }
 }

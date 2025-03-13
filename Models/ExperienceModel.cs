@@ -12,8 +12,10 @@ public class Experience  // representation of table
     public string? Title { get; set; }
 
     [Required]
-    public int Price { get; set; } // ? = allow nulls
+    public double Price { get; set; } // ? = allow nulls
     public int ProviderId { get; set; }
 
     public ICollection<Discount>? Discounts { get; set; }
+
+    public ICollection<SharedExperience>? SharedExperiences { get; set; }
 }

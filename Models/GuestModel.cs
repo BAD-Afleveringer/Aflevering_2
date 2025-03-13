@@ -8,7 +8,7 @@ public class Guest
     [Required]
     public int GuestAge { get; set; }
     [Required]
-    public int GuestNumber { get; set; }
+    public string? GuestNumber { get; set; }
     [Required]
     public string? GuestName { get; set; }
     public ICollection<SharedExperience>? SharedExperiences { get; set; }
