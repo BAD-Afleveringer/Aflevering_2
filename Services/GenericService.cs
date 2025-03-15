@@ -1,54 +1,54 @@
 using Microsoft.EntityFrameworkCore;
 using Aflevering_2.Models;
-using Aflevering_2;
 
-public class GenericService<T> where T : class
+namespace Aflevering_2.Services
 {
-    protected readonly ExperienceDbContext _context;
-    private readonly DbSet<T> _dbSet;
-
-    public GenericService(ExperienceDbContext context)
+    public class GenericService<T> where T : class
     {
-        _context = context;
-        _dbSet = context.Set<T>();
-    }
+        private readonly ExperienceDbContext _context;
+        private readonly DbSet<T> _dbSet;
 
-    public async Task<IEnumerable<T>> GetAllAsync()
-    {
-        return await _dbSet.ToListAsync();
-    }
-
-    public async Task<T?> GetByIdAsync(int id)
-    {
-        return await _dbSet.FindAsync(id);
-    }
-
-    public async Task addAsync(T entity)
-    {
-        _dbSet.Add(entity);
-        await _context.SaveChangesAsync();
-    }
-
-    public async Task UpdateAsync(T entity)
-    {
-        _context.Entry(entity).State = EntityState.Modified;
-        await _context.SaveChangesAsync();
-    }
-
-    public async Task DeleteAsync(int id)
-    {
-        var entity = await _dbSet.FindAsync(id);
-        if (entity != null)
+        public GenericService(ExperienceDbContext context)
         {
-            _dbSet.Remove(entity);
+            _context = context;
+            _dbSet = _context.Set<T>();
+        }
+
+        // Get all entities
+        public async Task<IEnumerable<T>> GetAllAsync()
+        {
+            return await _dbSet.ToListAsync();
+        }
+
+        // Get an entity by ID
+        public async Task<T?> GetByIdAsync(int id)
+        {
+            return await _dbSet.FindAsync(id);
+        }
+
+        // Add a new entity
+        public async Task AddAsync(T entity)
+        {
+            await _dbSet.AddAsync(entity);
             await _context.SaveChangesAsync();
+        }
+
+        // Update an existing entity
+        public async Task UpdateAsync(T entity)
+        {
+            _dbSet.Update(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        // Delete an entity by ID
+        public async Task DeleteAsync(int id)
+        {
+            var entity = await GetByIdAsync(id);
+            if (entity != null)
+            {
+                _dbSet.Remove(entity);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }
-
-/*
-public class UserService : GenericService<User>
-{
-    public UserService(AppDbContext context) : base(context) { }
-}
-*/

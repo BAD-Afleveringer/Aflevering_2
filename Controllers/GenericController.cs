@@ -1,70 +1,79 @@
-// using Microsoft.AspNetCore.Mvc;
-// using System.Collections.Generic;
-// using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Aflevering_2.Services;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-// [ApiController]
-// [Route("api/[controller]")]
-// public class GenericController<T> : ControllerBase where T : class
-// {
-//     protected readonly GenericService<T> _service;
+namespace Aflevering_2.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class GenericController<T> : ControllerBase where T : class
+    {
+        private readonly GenericService<T> _service;
 
-//     public GenericController(GenericService<T> service)
-//     {
-//         _service = service;
-//     }
+        public GenericController(GenericService<T> service)
+        {
+            _service = service;
+        }
 
-//     [HttpGet]
-//     public async Task<ActionResult<IEnumerable<T>>> GetAll()
-//     {
-//         var entities = await _service.GetAllAsync();
-//         return Ok(entities);
-//     }
+        // GET: api/[controller]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<T>>> GetAll()
+        {
+            var entities = await _service.GetAllAsync();
+            return Ok(entities);
+        }
 
-//     [HttpGet("{id}")]
-//     public async Task<ActionResult<T>> GetById(int id)
-//     {
-//         var entity = await _service.GetByIdAsync(id);
-//         if (entity == null)
-//         {
-//             return NotFound();
-//         }
-//         return Ok(entity);
-//     }
+        // GET: api/[controller]/{id}
+        [HttpGet("{id}")]
+        public async Task<ActionResult<T>> GetById(int id)
+        {
+            var entity = await _service.GetByIdAsync(id);
+            if (entity == null)
+            {
+                return NotFound();
+            }
+            return Ok(entity);
+        }
 
-//     [HttpPost]
-//     public async Task<ActionResult> Create([FromBody] T entity)
-//     {
-//         if (entity == null)
-//         {
-//             return BadRequest();
-//         }
+        // POST: api/[controller]
+        [HttpPost]
+        public async Task<ActionResult> Create([FromBody] T entity)
+        {
+            if (entity == null)
+            {
+                return BadRequest();
+            }
 
-//         await _service.addAsync(entity);
-//         return CreatedAtAction(nameof(GetById), new { id = entity }, entity);
-//     }
+            await _service.AddAsync(entity);
+            return CreatedAtAction(nameof(GetById), new { id = entity }, entity);
+        }
 
-//     [HttpPut("{id}")]
-//     public async Task<ActionResult> Update(int id, [FromBody] T entity)
-//     {
-//         if (entity == null)
-//         {
-//             return BadRequest();
-//         }
+        // PUT: api/[controller]/{id}
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Update(int id, [FromBody] T entity)
+        {
+            if (entity == null)
+            {
+                return BadRequest();
+            }
 
-//         await _service.UpdateAsync(entity);
-//         return NoContent();
-//     }
+            await _service.UpdateAsync(entity);
+            return NoContent();
+        }
 
-//     [HttpDelete("{id}")]
-//     public async Task<ActionResult> Delete(int id)
-//     {
-//         var entity = await _service.GetByIdAsync(id);
-//         if (entity == null)
-//         {
-//             return NotFound();
-//         }
+        // DELETE: api/[controller]/{id}
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var entity = await _service.GetByIdAsync(id);
+            if (entity == null)
+            {
+                return NotFound();
+            }
 
-//         await _service.DeleteAsync(id);
-//         return NoContent();
-//     }
-// }
+            await _service.DeleteAsync(id);
+            return NoContent();
+        }
+    }
+}

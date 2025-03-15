@@ -14,3 +14,4 @@ public class Guest
     public ICollection<SharedExperience>? SharedExperiences { get; set; }
 
 }
+
