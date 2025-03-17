@@ -29,11 +29,24 @@ public class GenericService<T> where T : class
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateAsync(T entity)
+    public async Task UpdateAsync(int id, T entity)
+    {
+        // _context.Entry(entity).State = EntityState.Modified;
+        var currentEntity = await GetByIdAsync(id);
+        currentEntity = entity;
+        _dbSet.Update(currentEntity);
+
+        await _context.SaveChangesAsync();
+    }
+
+    /*
+         public async Task UpdateAsync(T entity)
     {
         _context.Entry(entity).State = EntityState.Modified;
         await _context.SaveChangesAsync();
     }
+
+    */
 
     public async Task DeleteAsync(int id)
     {

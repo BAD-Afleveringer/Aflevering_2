@@ -14,3 +14,13 @@ public class Guest
     public ICollection<SharedExperience>? SharedExperiences { get; set; }
 
 }
+
+public class CreateGuestDTO
+{
+    [Required]
+    public int GuestAge { get; set; }
+    [Required]
+    public string? GuestNumber { get; set; }
+    [Required]
+    public string? GuestName { get; set; }
+}

@@ -14,3 +14,12 @@ public class SharedExperience
     public ICollection<Guest>? Guests { get; set; }
     public ICollection<Experience>? Experiences { get; set; }
 }
+
+public class SharedExperienceDTO
+{
+    [Required]
+    public string? SE_Title { get; set; }
+
+    [Required]
+    public DateTime SE_Date { get; set; }
+}

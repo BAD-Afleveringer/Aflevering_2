@@ -32,8 +32,9 @@
 //     }
 
 //     [HttpPost]
-//     public async Task<ActionResult> Create([FromBody] T entity)
+//     public virtual async Task<ActionResult> Create([FromBody] T entity)
 //     {
+
 //         if (entity == null)
 //         {
 //             return BadRequest();

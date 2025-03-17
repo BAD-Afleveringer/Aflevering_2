@@ -14,3 +14,14 @@ public class Discount
     // ExperienceID
     public int ExperienceId { get; set; }
 }
+
+public class DiscountDTO
+{
+    // minGuests
+    [Required]
+    public int minGuests { get; set; }
+    // discountPercentage
+    public int discountPercentage { get; set; }
+    // ExperienceID
+    public int ExperienceId { get; set; }
+}
