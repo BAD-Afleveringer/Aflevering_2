@@ -79,7 +79,7 @@ public class Experience  // representation of table
 
     [Required]
     [AboveZero]
-    public double Price { get; set; } // ? = allow nulls
+    public int Price { get; set; } // ? = allow nulls
     public int ProviderId { get; set; }
 
     public ICollection<Discount>? Discounts { get; set; }
@@ -96,7 +96,7 @@ public class CreateExperienceDTO
     [Required]
     [AboveZero]
     //[Range(0, double.MaxValue, ErrorMessage = "Price needs to be above 0. ")]
-    public double Price { get; set; }
+    public int Price { get; set; }
     public int ProviderId { get; set; }
 
 }

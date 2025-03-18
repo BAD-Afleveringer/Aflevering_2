@@ -23,28 +23,28 @@ public class ExperienceDbContext : DbContext
                 // setting id's really doesnt matter because the chosen id will be overwritten when seeded to the database,
                 // with the correct value according to it being identity and primary key. It is required though.
                 ProviderId = 1,
-                CVR = 45987632,
+                TouristicOperatorPermitPdf = new byte[] {1,2,5,4,5},
                 Address = "Sunset Boulevard 21B, 8000",
                 PhoneNumber = "+4543219876",
             },
             new Provider
             {
                 ProviderId = 2,
-                CVR = 87542319,
+                TouristicOperatorPermitPdf = new byte[] {1,4,3,4,5},
                 Address = "Lakeside Road 8, 5000",
                 PhoneNumber = "+4578945632"
             },
             new Provider
             {
                 ProviderId = 3,
-                CVR = 65498731,
+                TouristicOperatorPermitPdf = new byte[] {2,3,3,4,5},
                 Address = "Mountain View 12, 3400",
                 PhoneNumber = "+4598765432"
             },
             new Provider
             {
                 ProviderId = 4,
-                CVR = 32145698,
+                TouristicOperatorPermitPdf = new byte[] {1,2,3,4,5},
                 Address = "Coastal Lane 5A, 6000",
                 PhoneNumber = "+4543219876"
             }

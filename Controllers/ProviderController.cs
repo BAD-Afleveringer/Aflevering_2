@@ -37,7 +37,7 @@ public class ProviderTestController : ControllerBase
     {
         var provider = new Provider
         {
-            CVR = createProviderDTO.CVR,
+            TouristicOperatorPermitPdf = createProviderDTO.TouristicOperatorPermitPdf,
             PhoneNumber = createProviderDTO.PhoneNumber,
             Address = createProviderDTO.Address
         };
@@ -55,7 +55,7 @@ public class ProviderTestController : ControllerBase
         }
         var provider = new Provider
         {
-            CVR = createProviderDTO.CVR,
+            TouristicOperatorPermitPdf = createProviderDTO.TouristicOperatorPermitPdf,
             PhoneNumber = createProviderDTO.PhoneNumber,
             Address = createProviderDTO.Address
         };

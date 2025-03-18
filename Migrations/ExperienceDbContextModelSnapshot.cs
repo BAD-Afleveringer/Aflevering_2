@@ -69,8 +69,8 @@ namespace Aflevering_2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExperienceId"));
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
 
                     b.Property<int>("ProviderId")
                         .HasColumnType("int");
@@ -89,49 +89,49 @@ namespace Aflevering_2.Migrations
                         new
                         {
                             ExperienceId = 1,
-                            Price = 350.0,
+                            Price = 350,
                             ProviderId = 1,
                             Title = "Kayaking"
                         },
                         new
                         {
                             ExperienceId = 2,
-                            Price = 450.0,
+                            Price = 450,
                             ProviderId = 2,
                             Title = "food"
                         },
                         new
                         {
                             ExperienceId = 3,
-                            Price = 600.0,
+                            Price = 600,
                             ProviderId = 3,
                             Title = "Wine tasting"
                         },
                         new
                         {
                             ExperienceId = 4,
-                            Price = 275.0,
+                            Price = 275,
                             ProviderId = 4,
                             Title = "Guided City Tour"
                         },
                         new
                         {
                             ExperienceId = 5,
-                            Price = 220.0,
+                            Price = 220,
                             ProviderId = 2,
                             Title = "Fredagsbar"
                         },
                         new
                         {
                             ExperienceId = 6,
-                            Price = 750.0,
+                            Price = 750,
                             ProviderId = 2,
                             Title = "Paragliding"
                         },
                         new
                         {
                             ExperienceId = 7,
-                            Price = 525.0,
+                            Price = 525,
                             ProviderId = 3,
                             Title = "Diving"
                         });
@@ -203,12 +203,13 @@ namespace Aflevering_2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CVR")
-                        .HasColumnType("int");
-
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("TouristicOperatorPermitPdf")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("ProviderId");
 
@@ -219,29 +220,29 @@ namespace Aflevering_2.Migrations
                         {
                             ProviderId = 1,
                             Address = "Sunset Boulevard 21B, 8000",
-                            CVR = 45987632,
-                            PhoneNumber = "+4543219876"
+                            PhoneNumber = "+4543219876",
+                            TouristicOperatorPermitPdf = new byte[] { 1, 2, 5, 4, 5 }
                         },
                         new
                         {
                             ProviderId = 2,
                             Address = "Lakeside Road 8, 5000",
-                            CVR = 87542319,
-                            PhoneNumber = "+4578945632"
+                            PhoneNumber = "+4578945632",
+                            TouristicOperatorPermitPdf = new byte[] { 1, 4, 3, 4, 5 }
                         },
                         new
                         {
                             ProviderId = 3,
                             Address = "Mountain View 12, 3400",
-                            CVR = 65498731,
-                            PhoneNumber = "+4598765432"
+                            PhoneNumber = "+4598765432",
+                            TouristicOperatorPermitPdf = new byte[] { 2, 3, 3, 4, 5 }
                         },
                         new
                         {
                             ProviderId = 4,
                             Address = "Coastal Lane 5A, 6000",
-                            CVR = 32145698,
-                            PhoneNumber = "+4543219876"
+                            PhoneNumber = "+4543219876",
+                            TouristicOperatorPermitPdf = new byte[] { 1, 2, 3, 4, 5 }
                         });
                 });
 

@@ -6,7 +6,8 @@ public class Provider
 {
     public int ProviderId { get; set; }
     [Required]
-    public int CVR { get; set; }
+    public byte[]? TouristicOperatorPermitPdf { get; set; }
+
     [Required]
     public string? Address { get; set; }
     [Required]
@@ -19,7 +20,7 @@ public class Provider
 public class CreateProviderDTO
 {
     [Required]
-    public int CVR { get; set; }
+    public byte[]? TouristicOperatorPermitPdf { get; set; }
     [Required]
     public string? Address { get; set; }
     [Required]
