@@ -20,9 +20,12 @@ builder.Services.AddSwaggerGen(c =>
     var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
-
 });
-builder.Services.AddDbContext<ExperienceDbContext>(options => options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]));
+
+// Update the AddDbContext method to include TrustServerCertificate=True
+builder.Services.AddDbContext<ExperienceDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") + ";TrustServerCertificate=True;"));
+
 builder.Services.AddScoped<QueryService>();
 builder.Services.AddScoped<GenericService<Provider>>();
 builder.Services.AddScoped<GenericService<Experience>>();
@@ -31,10 +34,7 @@ builder.Services.AddScoped<GenericService<Discount>>();
 builder.Services.AddScoped<GenericService<SharedExperience>>();
 builder.Services.AddSingleton(logger);
 
-
-
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
