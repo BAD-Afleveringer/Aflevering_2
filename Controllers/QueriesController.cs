@@ -44,10 +44,10 @@ public class QueriesController : ControllerBase
         return Ok(guestsInSharedExperiences);
     }
 
-    [HttpGet("GetAllExperienceInSharedExperiences/{seID}")]
+    [HttpGet("GetAllExperienceInSharedExperiences/{seID}")]// error here
     public async Task<ActionResult> GetAllExperiencesInSharedExperienceAsync(int seID)
     {
-        var experiencesInSharedExperiences = await _service.GetAllExperiencesInSharedExperienceAsync(seID);
+        var experiencesInSharedExperiences = await _service.GetAllExperiencesInSharedExperienceAsync(seID); 
         return Ok(experiencesInSharedExperiences);
     }
 
@@ -72,7 +72,7 @@ public class QueriesController : ControllerBase
         return Ok(GetAllExp_Price_Guests);
     }
 
-    [HttpGet("GetDiscountsForAllExp")]
+    [HttpGet("GetDiscountsForAllExp")]// error here
     public async Task<ActionResult> GetDiscountsByAllExperiences()
     {
         var GetAllDiscountsByExp = await _service.GetDiscountsByAllExperiencesAsync();
