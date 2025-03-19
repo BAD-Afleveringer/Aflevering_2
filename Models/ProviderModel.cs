@@ -21,6 +21,7 @@ public class CreateProviderDTO
 {
     [Required]
     public byte[]? TouristicOperatorPermitPdf { get; set; }
+
     [Required]
     public string? Address { get; set; }
     [Required]

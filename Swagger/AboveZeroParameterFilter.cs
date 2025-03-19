@@ -21,7 +21,7 @@ namespace Aflevering_2.Swagger
                     if (attribute != null)
                     {
                         // Set minimum value to 1
-                        parameter.Schema.Minimum = 1;
+                        parameter.Schema.Minimum = 0;
                         // Append warning to the description
                         parameter.Description = (parameter.Description ?? "") + " (Must be greater than zero)";
                     }
