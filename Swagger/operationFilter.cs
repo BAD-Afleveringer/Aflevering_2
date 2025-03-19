@@ -22,7 +22,7 @@ namespace Aflevering_2.Swagger
                     Name = "Title",
                     In = ParameterLocation.Query,
                     Required = true,
-                    Schema = new OpenApiSchema { Type = "string" }
+                    Schema = new OpenApiSchema { Type = "string" },
                 });
                 operation.Parameters.Add(new OpenApiParameter
                 {
