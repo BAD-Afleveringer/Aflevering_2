@@ -30,19 +30,16 @@ public class QueryService
 
     public async Task<List<Guest>> GetAllGuestsInSharedExperienceAsync(int seId)
     {
-        return await _context.SharedExperiences
-            .Where(se => se.SharedExperienceId == seId)
-            .Include(se => se.Guests)
-            .SelectMany(se => se.Guests ?? new List<Guest>()) // Basically just a select where we select a collection instead
-            .ToListAsync();
+        return await _context.Guests
+        // Selects guests where SharedExperienceId of a related SharedExperience is equal to seId
+        .Where(g => g.SharedExperiences.Any(se => se.SharedExperienceId == seId))
+        .ToListAsync();
     }
 
-    public async Task<List<Experience>> GetAllExperiencesInSharedExperienceAsync(int seID)
+    public async Task<List<Experience>> GetAllExperiencesInSharedExperienceAsync(int seId)
     {
-        return await _context.SharedExperiences
-        .Where(se => se.SharedExperienceId == seID)
-        .Include(se => se.Experiences)
-        .SelectMany(se => se.Experiences ?? new List<Experience>())
+        return await _context.Experiences
+        .Where(se => se.SharedExperiences.Any(se => se.SharedExperienceId == seId))
         .ToListAsync();
     }
 
@@ -85,29 +82,13 @@ public class QueryService
         return experienceSalesData;
     }
 
-    public async Task<List<Discount>> GetDiscountsByAllExperiencesAsync()
+    public async Task<List<Experience>> GetDiscountsByAllExperiencesAsync()
     {
         return await _context.Experiences
                              .Include(exp => exp.Discounts)
-                             .SelectMany(exp => exp.Discounts ?? new List<Discount>())
                              .ToListAsync();
-
-
-        // var experiences = await _context.Experiences.ToListAsync();
-
-
-        // List<Discount> discounts = new List<Discount>();
-        // foreach (var experience in experiences)
-        // {
-        //     int percentage = experience.Discounts.Select(discount => discount.discountPercentage);
-        //     var guests = await GetAllGuestsRegisteredForExperiencesInSharedExperienceAsync(experience.Title);
-        //     int count = guests.Count();
-
-
-        //     discounts.Add(count, ,, )
-
-        // }
 
     }
 
 }
+//
