@@ -29,7 +29,7 @@ namespace Aflevering_2.Swagger
                     Name = "Price",
                     In = ParameterLocation.Query,
                     Required = true,
-                    Schema = new OpenApiSchema { Type = "integer" }
+                    Schema = new OpenApiSchema { Type = "integer", Minimum = 0 }
                 });
                 operation.Parameters.Add(new OpenApiParameter
                 {

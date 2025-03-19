@@ -39,7 +39,7 @@ public class ExperienceController : ControllerBase
 
     // create experience 
     [HttpPost]
-    public async Task<ActionResult> Create([FromBody] CreateExperienceDTO createExperienceDTO)
+    public async Task<ActionResult> Create([FromQuery] CreateExperienceDTO createExperienceDTO)
     {
         var experience = new Experience
         {
