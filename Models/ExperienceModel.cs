@@ -33,7 +33,7 @@ public class AboveZeroAttribute : ValidationAttribute
 
     public override bool IsValid(object value)
     {
-        if (value is double price)
+        if (value is int price)
         {
             return price >= 0; // Ensure price is 0 or greater
         }
