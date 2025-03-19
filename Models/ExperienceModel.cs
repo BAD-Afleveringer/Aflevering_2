@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Aflevering_2.Swagger;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Aflevering_2.Models;
 /* public class PriceValidationAttribute : ValidationAttribute
@@ -91,12 +92,15 @@ public class Experience  // representation of table
 public class CreateExperienceDTO
 {
     [Required]
+    [FromQuery]
     public string? Title { get; set; }
 
     [Required]
     [AboveZero]
+    [FromQuery]
     //[Range(0, double.MaxValue, ErrorMessage = "Price needs to be above 0. ")]
     public int Price { get; set; }
+    [FromQuery]
     public int ProviderId { get; set; }
 
 }
