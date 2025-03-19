@@ -3,100 +3,62 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Aflevering_2.Swagger;
+using Swashbuckle.AspNetCore.Annotations;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Aflevering_2.Models;
-/* public class PriceValidationAttribute : ValidationAttribute
+namespace Aflevering_2.Models
 {
-    protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+    public class AboveZeroAttribute : ValidationAttribute
     {
-        if (value is double price)
+        public AboveZeroAttribute()
         {
-            if (price > 0)
-            {
-                return ValidationResult.Success;
-            }
-            else
-            {
-                return new ValidationResult("Price must be a positive number.");
-            }
-        }
-        return new ValidationResult("Invalid price value.");
-    }
-} */
-
-public class AboveZeroAttribute : ValidationAttribute
-{
-    public AboveZeroAttribute()
-    {
-        ErrorMessage = "Price must be above zero.";
-    }
-
-    public override bool IsValid(object value)
-    {
-        if (value is int price)
-        {
-            return price >= 0; // Ensure price is 0 or greater
-        }
-        return false;
-    }
-}
-
-
-/*
-public class AboveZeroAttribute : Attribute, IModelValidator
-{
-    public string ErrorMessage { get; set; } = "price must be above zero";
-    public IEnumerable<ModelValidationResult> Validate(ModelValidationContext context)
-    {
-
-        // check if its positive
-        if (context.Model is double price)
-        {
-            if (price < 0)
-            {
-                return new List<ModelValidationResult>{
-                    new ModelValidationResult("", ErrorMessage)
-                };
-            }
-            return Enumerable.Empty<ModelValidationResult>();
+            ErrorMessage = "Price must be above zero.";
         }
 
-        return Enumerable.Empty<ModelValidationResult>();
+        public override bool IsValid(object value)
+        {
+            if (value is int price)
+            {
+                return price > 0; // Ensure price is greater than 0
+            }
+            return false;
+        }
     }
 
-}
-*/
+    // data representation
+    public class Experience  // representation of table
+    {
+        public int ExperienceId { get; set; }
 
+        [Required]
+        public string? Title { get; set; }
 
-// data representation
+        [Required]
+        [AboveZero]
+        public int Price { get; set; } // ? = allow nulls
+        public int ProviderId { get; set; }
 
-public class Experience  // representation of table
-{
-    public int ExperienceId { get; set; }
+        public ICollection<Discount>? Discounts { get; set; }
 
-    [Required]
-    public string? Title { get; set; }
+        public ICollection<SharedExperience>? SharedExperiences { get; set; }
+    }
 
-    [Required]
-    [AboveZero]
-    public int Price { get; set; } // ? = allow nulls
-    public int ProviderId { get; set; }
+    // used to create experience without discount or shared experience
+    public class CreateExperienceDTO
+    {
+        [Required]
+        [SwaggerSchema(Description = "Title of the experience", Nullable = false)]
+        [FromQuery]
+        public string? Title { get; set; }
 
-    public ICollection<Discount>? Discounts { get; set; }
+        [Required]
+        [FromQuery]
+        [SwaggerSchema(Description = "Price of the experience, must be above zero", Nullable = false)]
+        [AboveZero]
+        public int Price { get; set; }
 
-    public ICollection<SharedExperience>? SharedExperiences { get; set; }
-}
-
-// used to create experience without discount or shared experience
-public class CreateExperienceDTO
-{
-    [Required]
-    public string? Title { get; set; }
-
-    [Required]
-    [AboveZero]
-    //[Range(0, double.MaxValue, ErrorMessage = "Price needs to be above 0. ")]
-    public int Price { get; set; }
-    public int ProviderId { get; set; }
-
+        [SwaggerSchema(Description = "ID of the provider", Nullable = false)]
+        [FromQuery]
+        public int ProviderId { get; set; }
+    }
 }
